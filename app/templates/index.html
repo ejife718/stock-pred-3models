@@ -12,4 +12,39 @@
 	  	<h2 class="ui header">Hi {{ current_user.first_name }}!</h2>
 	{% endif %}
 
+	<div>
+		<h2>Disney Stock Forecast</h2>
+		<p>Here are shown results for three different machine learning models trained to predict future prices of DIS stock.</p>
+		<p>Data source is Yahoo Finance last 5 years of data.</p>
+		<p>The data was divided into training and test samples. The test sample contains the last 90 days of available data.</p>
+		<p>The model's target variable is the  one day change in Adjusted Close price, i.e. the first difference of close price in USD per share.</p>
+		<p>The model's features are 60 lags of the percent change of the Adjusted Close price.</p>
+		<ul>The three models trained are:
+			<li>Linear Regression: simple linear model with no regularization</li>
+			<li>Kernel Ridge Regression: kernel trick with L2 regularization</li>
+			<li>Multi Layer Perceptron: fully connected MLP with 30 layers, tanh activation.</li>
+		</ul>
+	</div>
+
+
+	<div>
+		<h2>Results in 1st difference</h2>
+		<img src="/dif1.png" alt="my plot">
+		<p>The chart above shows the models' performance predicting the first difference of Close Price in the test sample only.</p>
+		<p>It is very evident that no model can catch the variability of DIS stock price and all perform quite poorly. Furthermore, the Kernel Ridge Regression is the best performing model, and the daily predicted price change is very close to Zero.</p>
+	</div>
+
+	<div>
+		<h2>Results at price level</h2>
+		<img src="/price.png" alt="my plot">
+		<p>Adding the previous day close price plus the forecasted price change, we get the price level forecast. All three models predict today's price to be very close to yesterday's price, this is a very typical result when attempting to forecast a random walk</p>
+	</div>
+
+	<div>
+		<p>Price chart</p>
+	</div>
+
+	<script src="../../static/js/index.js"></script>
+
 {% endblock %}
+
